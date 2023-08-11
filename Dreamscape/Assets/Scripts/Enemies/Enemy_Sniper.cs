@@ -7,6 +7,7 @@ public class Enemy_Sniper : MonoBehaviour
     public Transform target;
     public CameraEffects camera;
     public float speed = 5.0f;
+    public float touchRadius = 0.2f; // Radius to consider a touch with the target
 
     public float lifeTime;
     public float currentLifeTime;
@@ -78,7 +79,11 @@ public class Enemy_Sniper : MonoBehaviour
     private void shoot()
     {
         // Check if hit target
-
+        // Check if the circle is touching the target
+        if (Vector2.Distance(transform.position, target.position) <= touchRadius)
+        {
+            target.GetComponent<playerHealth>().GetHit(1);
+        }
         // shake camera
         camera.ShakeCamera();
         // Destroy self

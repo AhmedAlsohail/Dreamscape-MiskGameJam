@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Enemy_Grower : MonoBehaviour
@@ -13,12 +11,14 @@ public class Enemy_Grower : MonoBehaviour
     private float originalRadius;
     private float timer;
 
+    Transform child;
     void Start()
     {
         target = GameObject.FindWithTag("Player").transform; // Find target by tag if needed
         circleCollider = GetComponent<CircleCollider2D>();
         originalRadius = circleCollider.radius;
         timer = waitTime; // Set timer to the wait time
+        child = transform.Find("Animation"); // Replace "ChildName" with the actual name of the child
     }
 
     void Update()
@@ -30,23 +30,12 @@ public class Enemy_Grower : MonoBehaviour
         }
         else
         {
-            // Grow the circle
+            // Grow the collider
             circleCollider.radius += growthRate * Time.deltaTime;
 
-            // Scale the object's transform to match the collider's size
-            transform.localScale = Vector3.one * (circleCollider.radius / originalRadius);
-
-            // Check if the circle is touching the target
-            if (Vector2.Distance(transform.position, target.position) <= circleCollider.radius + touchRadius)
-            {
-                HitTarget();
-                // You can add more actions here, like stopping the growth or destroying the target, etc.
-            }
+            // Update the object's scale based on the collider's size
+            float scaleFactor = circleCollider.radius / originalRadius;
+            child.localScale = new Vector3(scaleFactor, scaleFactor, 1f);
         }
-    }
-
-    public void HitTarget()
-    {
-        Destroy(gameObject);
     }
 }

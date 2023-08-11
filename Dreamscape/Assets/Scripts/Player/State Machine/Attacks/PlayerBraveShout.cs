@@ -47,7 +47,7 @@ public class PlayerBraveShout : PlayerState
             player.Run(xInput, 1f);
         }
 
-        if (Time.time - timeAttacked > 1f)
+        if (Time.time - timeAttacked > 5f)
         {
             if (xInput == 0)
             {

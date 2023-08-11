@@ -23,7 +23,7 @@ public class Projectile : MonoBehaviour
         if (collision.gameObject.tag == "Enemy")
         {
             Debug.Log("we hit");
-            Instantiate(DestroyEffect, transform.position, Quaternion.identity);
+            //Instantiate(DestroyEffect, transform.position, Quaternion.identity);
             Destroy(gameObject);
         }
     }

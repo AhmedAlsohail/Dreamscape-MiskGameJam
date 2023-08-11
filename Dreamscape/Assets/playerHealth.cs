@@ -2,10 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Health : MonoBehaviour
+public class playerHealth : MonoBehaviour
 {
     public int healthPoints;
     public int currentHealth;
+    public GameObject deathPanel;
+    public GameObject roundManager;
     void Start()
     {
         currentHealth = healthPoints;
@@ -22,7 +24,7 @@ public class Health : MonoBehaviour
     {
         currentHealth -= damage;
 
-        if(currentHealth <= 0)
+        if (currentHealth <= 0)
         {
             Die();
         }
@@ -31,6 +33,8 @@ public class Health : MonoBehaviour
     private void Die()
     {
         // Apply particle effect
-        Destroy(gameObject);        
+        deathPanel.SetActive(true);
+        Destroy(roundManager);
+        gameObject.SetActive(false);
     }
 }

@@ -31,6 +31,8 @@ public class Player : MonoBehaviour
     public Vector2 slopeNormalPerp;
     public float slopeDownAngle;
 
+    public bool isGrounded;
+
 
     public BoxCollider2D collider { get; private set; }
 
@@ -58,7 +60,7 @@ public class Player : MonoBehaviour
         //dashState = new PlayerDashState(this, stateMachine, "Dash");
         //slideState = new PlayerSlideState(this, stateMachine, "Slide");
 
-        primaryAttack = new PlayerWisdomStaff(this, stateMachine, "Attack");
+        primaryAttack = new PlayerBraveShout(this, stateMachine, "Attack");
     }
     private void Start()
     {
@@ -90,7 +92,7 @@ public class Player : MonoBehaviour
 
     public void HandleJump()
     {
-        if (Input.GetButtonDown("Jump"))// && IsGrounded())
+        if (Input.GetButtonDown("Jump") && IsGrounded())
         {
             velocity.y = jumpVelocity;
         }
@@ -135,13 +137,23 @@ public class Player : MonoBehaviour
         switch (newWeapon)
         {
             case 0:
+                primaryAttack = new PlayerWisdomStaff(this, stateMachine, "Attack");
                 break;
             case 1:
+                primaryAttack = new PlayerHopeEnergy(this, stateMachine, "Attack");
+                break;
+            case 2:
+                primaryAttack = new PlayerBraveShout(this, stateMachine, "Attack");
                 break;
         }
+
+        stateMachine.ChangeState(idleState);
     }
     public bool IsGrounded()
     {
+        if (isGrounded)
+            return true;
+
         if (controller.collisions.below)
         {
             return true;
@@ -151,5 +163,15 @@ public class Player : MonoBehaviour
             return false;
         }
     }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Ground")
+            isGrounded = true;
+    }
 
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Ground")
+            isGrounded = false;
+    }
 }

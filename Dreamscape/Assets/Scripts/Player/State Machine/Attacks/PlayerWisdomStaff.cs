@@ -30,13 +30,13 @@ public class PlayerWisdomStaff : PlayerState
         base.Enter();
 
         timeAttacked = Time.time;
+
         // Assign needed variables
         shootPoint = player.transform;
-        // Porjectile Prefab
-        string prefabPath = "Assets/Prefabs/WisdomStaffProj.prefab";
-        projectilePrefab = AssetDatabase.LoadAssetAtPath<GameObject>(prefabPath);
 
-        player.anim.SetInteger("ComboCounter", 0);
+        // Porjectile Prefab
+        string prefabPath = "Assets/Prefabs/Projectiles/WisdomStaffProj.prefab";
+        projectilePrefab = AssetDatabase.LoadAssetAtPath<GameObject>(prefabPath);
 
         offset = 90f;
         startTimeBtwShoots = 1f;
@@ -60,7 +60,14 @@ public class PlayerWisdomStaff : PlayerState
 
         player.HandleGravity();
         player.HandleJump();
-        player.Run(xInput, 1f);
+        if (!player.IsGrounded() && player.velocity.y < 0)
+        {
+            player.Run(xInput, 0.4f);
+        }
+        else
+        {
+            player.Run(xInput, 1f);
+        }
 
         if (Time.time - timeAttacked > 1f)
         {

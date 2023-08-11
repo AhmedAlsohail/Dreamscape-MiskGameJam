@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class Enemy_Sniper : MonoBehaviour
 {
-    public GameObject target;
+    public Transform target;
+    public CameraEffects camera;
     public float speed = 5.0f;
 
     public float lifeTime;
@@ -19,7 +20,8 @@ public class Enemy_Sniper : MonoBehaviour
 
     void Start()
     {
-        target = GameObject.FindWithTag("Player");
+        target = GameObject.FindWithTag("Player").transform;
+        camera = GameObject.FindWithTag("MainCamera").GetComponent<CameraEffects>();
         currentLifeTime = lifeTime;
         currentMoveTime = moveTime;
     }
@@ -62,19 +64,24 @@ public class Enemy_Sniper : MonoBehaviour
             float t = Mathf.Clamp01(elapsedTime / durationToTarget);
 
             // Smoothly move the object from initialPosition to target position
-            transform.position = Vector3.Lerp(initialPosition, target.transform.position, t);
+            transform.position = Vector3.Lerp(initialPosition, target.position, t);
 
             yield return null; // Wait for the next frame
         }
 
         // Ensure the object reaches the exact target position
-        transform.position = target.transform.position;
+        transform.position = target.position;
 
         isMoving = false; // Movement is completed
     }
 
     private void shoot()
     {
+        // Check if hit target
+
+        // shake camera
+        camera.ShakeCamera();
+        // Destroy self
         Destroy(gameObject);
     }
 }

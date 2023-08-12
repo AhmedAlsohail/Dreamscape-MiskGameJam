@@ -29,7 +29,7 @@ public class PlayerWisdomStaff : PlayerState
     {
         base.Enter();
 
-        timeAttacked = Time.time;
+        player.lastTimeAttacked = Time.time;
 
         // Assign needed variables
         shootPoint = player.transform;
@@ -50,8 +50,6 @@ public class PlayerWisdomStaff : PlayerState
     public override void Exist()
     {
         base.Exist();
-
-        lastTimeAttacked = Time.time;
     }
 
     public override void Update()
@@ -69,7 +67,7 @@ public class PlayerWisdomStaff : PlayerState
             player.Run(xInput, 1f);
         }
 
-        if (Time.time - timeAttacked > 1f)
+        if (Time.time - timeAttacked > 0.25f)
         {
             if (xInput == 0)
             {
@@ -81,6 +79,7 @@ public class PlayerWisdomStaff : PlayerState
                 stateMachine.ChangeState(player.moveState);
             }
         }
+
     }
 
     private void shoot()

@@ -23,7 +23,7 @@ public class PlayerState
     // Every time the state changes
     public virtual void Enter()
     {
-        //player.anim.SetBool(animBoolName, true);
+        player.anim.SetBool(animBoolName, true);
         triggerCalled = false;
         Debug.Log($"I am currently at {animBoolName}");
     }
@@ -33,13 +33,13 @@ public class PlayerState
         stateTimer -= Time.deltaTime;
 
         xInput = Input.GetAxisRaw("Horizontal");
-        //player.anim.SetFloat("yVelocity", player.velocity.y);
-        //player.anim.SetFloat("moveSpd", player.velocity.x);
+        player.anim.SetFloat("yVelocity", player.velocity.y);
+        player.anim.SetFloat("moveSpd", player.velocity.x);
     }
 
     public virtual void Exist()
     {
-        //player.anim.SetBool(animBoolName, false);
+        player.anim.SetBool(animBoolName, false);
     }
 
     public virtual void AnimationFinishTrigger()

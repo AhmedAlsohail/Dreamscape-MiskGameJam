@@ -11,6 +11,8 @@ public class PlayerHopeEnergy : PlayerState
 
     private float timer;
     private float currentRotation;
+    private float timAttacked;
+
 
     public PlayerHopeEnergy(Player _player, PlayerStateMachine _stateMachine, string _animBoolName) : base(_player, _stateMachine, _animBoolName)
     {
@@ -19,6 +21,7 @@ public class PlayerHopeEnergy : PlayerState
     public override void Enter()
     {
         base.Enter();
+        player.lastTimeAttacked = Time.time;
 
         timer = spawnRate; // Initialize timer
         currentRotation = Random.Range(0,360); // Initialize rotation

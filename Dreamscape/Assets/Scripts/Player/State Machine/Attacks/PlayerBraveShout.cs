@@ -6,7 +6,6 @@ using UnityEngine;
 public class PlayerBraveShout : PlayerState
 {
     private float timeAttacked;
-    private float lastTimeAttacked;
 
     public GameObject projectilePrefab; // Prefab to instantiate
     public float scaleRate = 0.1f; // Rate of scaling per second
@@ -19,6 +18,8 @@ public class PlayerBraveShout : PlayerState
     {
         base.Enter();
 
+        player.lastTimeAttacked = Time.time;
+
         string prefabPath = "Assets/Prefabs/Projectiles/BraveShoutProjectile.prefab";
         projectilePrefab = AssetDatabase.LoadAssetAtPath<GameObject>(prefabPath);
         timeAttacked = Time.time;
@@ -29,7 +30,6 @@ public class PlayerBraveShout : PlayerState
     public override void Exist()
     {
         base.Exist();
-        lastTimeAttacked = Time.time;
     }
 
     public override void Update()
@@ -47,7 +47,7 @@ public class PlayerBraveShout : PlayerState
             player.Run(xInput, 1f);
         }
 
-        if (Time.time - timeAttacked > 5f)
+        if (Time.time - timeAttacked > 0.25f)
         {
             if (xInput == 0)
             {

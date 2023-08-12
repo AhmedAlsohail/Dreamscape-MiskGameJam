@@ -25,7 +25,7 @@ public class PlayerJumpState : PlayerState
         player.Run(xInput, 1);
         player.HandleGravity();
 
-        if (Input.GetKeyDown(KeyCode.Mouse0)) // Make it GetKey() only if you want the player to combo using hold button not clicks. 
+        if (Input.GetButtonDown("Fire") && (Time.time - player.lastTimeAttacked > player.cooldown)) // Make it GetKey() only if you want the player to combo using hold button not clicks. 
         {
             stateMachine.ChangeState(player.primaryAttack);
         }

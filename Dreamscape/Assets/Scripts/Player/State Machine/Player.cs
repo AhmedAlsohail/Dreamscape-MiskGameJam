@@ -33,6 +33,10 @@ public class Player : MonoBehaviour
 
     public bool isGrounded;
 
+    [Header("Cooldown")]
+    public float lastTimeAttacked;
+    public float cooldown;
+    public float[] cds;
 
     public BoxCollider2D collider { get; private set; }
 
@@ -46,8 +50,6 @@ public class Player : MonoBehaviour
 
     public PlayerState primaryAttack { get; private set; } // Type PlayerState because the state type will be changing for each weapon
 
-    //public PlayerDashState dashState { get; private set; }
-    //public PlayerSlideState slideState { get; private set; }
 
     private void Awake()
     {
@@ -57,8 +59,6 @@ public class Player : MonoBehaviour
         moveState = new PlayerMoveState(this, stateMachine, "Move");
         jumpState = new PlayerJumpState(this, stateMachine, "Jump");
         airState = new PlayerAirState(this, stateMachine, "Jump");
-        //dashState = new PlayerDashState(this, stateMachine, "Dash");
-        //slideState = new PlayerSlideState(this, stateMachine, "Slide");
 
         primaryAttack = new PlayerBraveShout(this, stateMachine, "Attack");
     }
@@ -108,6 +108,19 @@ public class Player : MonoBehaviour
         FlipController(velocity.x);
     }
 
+    public void Flip()
+    {
+        if (isFacingRight)
+        {
+            GetComponentInChildren<SpriteRenderer>().flipX = false; // We want to flip when not facing right.
+        }
+        else
+        {
+            GetComponentInChildren<SpriteRenderer>().flipX = true; // We want to flip when not facing right.
+        }
+
+    }
+
     public void FlipController(float _x)
     {
         if (_x > 0 && !isFacingRight)
@@ -120,6 +133,8 @@ public class Player : MonoBehaviour
             facingDir = -1;
             isFacingRight = !isFacingRight;
         }
+
+        Flip();
     }
 
     public void ResetVelocityX()
@@ -138,15 +153,22 @@ public class Player : MonoBehaviour
         {
             case 0:
                 primaryAttack = new PlayerWisdomStaff(this, stateMachine, "Attack");
+                cooldown = 0.5f;
                 break;
             case 1:
                 primaryAttack = new PlayerHopeEnergy(this, stateMachine, "Attack");
+                cooldown = 0f;
                 break;
             case 2:
                 primaryAttack = new PlayerBraveShout(this, stateMachine, "Attack");
+                cooldown = 5f;
                 break;
         }
 
+        // Reset Cooldown.
+        lastTimeAttacked = Time.time - 100f;
+
+        anim.SetFloat("Weapon", newWeapon);
         stateMachine.ChangeState(idleState);
     }
     public bool IsGrounded()

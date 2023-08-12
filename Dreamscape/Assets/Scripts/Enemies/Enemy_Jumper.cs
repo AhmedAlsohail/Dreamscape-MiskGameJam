@@ -25,6 +25,21 @@ public class Enemy_Jumper : MonoBehaviour
     {
         if (target != null)
         {
+            // Get the direction from the object to the target
+            Vector3 directionToTarget = target.position - transform.position;
+
+            // Check if the target is on the left or right
+            if (directionToTarget.x < 0)
+            {
+                // Flip the object
+                transform.localScale = new Vector3(-1, 1, 1); // Flipped along the X-axis
+            }
+            else
+            {
+                // Unflip the object
+                transform.localScale = new Vector3(1, 1, 1); // Normal scale
+            }
+
             // Calculate the horizontal distance to the target
             float distanceToTarget = Vector2.Distance(transform.position, target.position);
 

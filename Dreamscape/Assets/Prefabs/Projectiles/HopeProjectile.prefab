@@ -75,7 +75,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 6c0484490e470994789774d9f341f088, type: 3}
-  m_Color: {r: 0.46844962, g: 0.7956146, b: 0.8207547, a: 1}
+  m_Color: {r: 0.9339623, g: 0.89845204, b: 0.2599235, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -187,3 +187,4 @@ MonoBehaviour:
   targetType: 1
   damage: 2
   destroyAfter: 1
+  timeSpawned: 0

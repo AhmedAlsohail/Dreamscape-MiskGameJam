@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5754240502112873604}
   - component: {fileID: 5754240502112873606}
+  - component: {fileID: 1181786278701751707}
   m_Layer: 0
   m_Name: Animation
   m_TagString: Untagged
@@ -26,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 5754240502112873603}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.2, y: 0.2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5754240502680419561}
@@ -72,9 +73,9 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_SortingOrder: 2
+  m_Sprite: {fileID: 21300000, guid: 29299b18fee79d942bcf8547c734e024, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -84,6 +85,27 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &1181786278701751707
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5754240502112873603}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 1d1bf58cbd4fb564aba2cf37900b262b, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &5754240502680419560
 GameObject:
   m_ObjectHideFlags: 0
@@ -150,9 +172,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
-  growthRate: 1
+  growthRate: 1.5
   touchRadius: 0.2
-  waitTime: 1.5
+  waitTime: 0.75
 --- !u!50 &-2893906659609537725
 Rigidbody2D:
   serializedVersion: 4
@@ -188,7 +210,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthPoints: 3
   currentHealth: 0
-  hideWhenDying: 0
 --- !u!114 &-5169283388885863325
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -204,3 +225,4 @@ MonoBehaviour:
   targetType: 0
   damage: 1
   destroyAfter: 1
+  timeSpawned: 0

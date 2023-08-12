@@ -17,8 +17,23 @@ public class Enemy_Fly : MonoBehaviour
     {
         if (target != null)
         {
+            // Get the direction from the object to the target
+            Vector3 directionToTarget = target.position - transform.position;
+
+            // Check if the target is on the left or right
+            if (directionToTarget.x < 0)
+            {
+                // Flip the object
+                transform.localScale = new Vector3(-1, 1, 1); // Flipped along the X-axis
+            }
+            else
+            {
+                // Unflip the object
+                transform.localScale = new Vector3(1, 1, 1); // Normal scale
+            }
+
             // Calculate the direction towards the target
-            Vector3 directionToTarget = (target.position - transform.position).normalized;
+            directionToTarget = (target.position - transform.position).normalized;
 
             // Add some randomness to the direction
             Vector3 randomDirection = new Vector3(Random.Range(-randomness, randomness), Random.Range(-randomness, randomness), Random.Range(-randomness, randomness));
@@ -31,4 +46,6 @@ public class Enemy_Fly : MonoBehaviour
             transform.position = newPosition;
         }
     }
+
+
 }

@@ -8,7 +8,13 @@ public class Hit : MonoBehaviour
     public TargetType targetType;
     public int damage;
     public bool destroyAfter;
-    
+    public float timeSpawned;
+
+    private void Start()
+    {
+        timeSpawned = Time.time;
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         switch (targetType)
@@ -16,9 +22,12 @@ public class Hit : MonoBehaviour
             case TargetType.Player:
                 if (collision.gameObject.tag == "Player")
                 {
-                    collision.gameObject.GetComponent<playerHealth>().GetHit(1); // Player always get hit by 1
-                    if(destroyAfter)
-                        Destroy(gameObject);
+                    if(Time.time - timeSpawned > 1f)
+                    {
+                        collision.gameObject.GetComponent<playerHealth>().GetHit(1); // Player always get hit by 1
+                        if (destroyAfter)
+                            Destroy(gameObject);
+                    }
                 }
                 break;
             case TargetType.Monster:

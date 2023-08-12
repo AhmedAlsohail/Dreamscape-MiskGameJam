@@ -44,6 +44,8 @@ public class PlayerWisdomStaff : PlayerState
 
         isFSon = false;
 
+        timeAttacked = Time.time;
+
         shoot();
     }
 

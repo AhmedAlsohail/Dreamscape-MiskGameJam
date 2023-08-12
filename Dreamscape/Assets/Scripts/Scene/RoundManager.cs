@@ -28,6 +28,8 @@ public class RoundManager : MonoBehaviour
     public Image imageUI; // Reference to the Image component
     public Sprite[] weaponsSprites; // Reference to the Sprite you want to assign
     public TextMeshProUGUI health;
+    public TextMeshProUGUI roundUI;
+    public TextMeshProUGUI roundTimer;
 
     [Header("Player")]
     public Player player;
@@ -35,6 +37,7 @@ public class RoundManager : MonoBehaviour
 
     [Header("Enemies")]
     public GameObject[] Enemies;
+    private List<GameObject> aliveEnemies = new List<GameObject>();
 
     void Start()
     {
@@ -45,14 +48,15 @@ public class RoundManager : MonoBehaviour
         nOfEnemies = Mathf.CeilToInt(round * nOfEnemiesMultiplayer) + 4;
         currentEnemies = nOfEnemies;
 
-        spawnEachInSeconds = roundTime / nOfEnemies;
-        spawnTimer = spawnEachInSeconds;
-        spwanEnemy();
+        spawnEachInSeconds = 3.5f - (round * 0.2f   );
+        spawnTimer = 2f;
     }
 
     void Update()
     {
         timer -= Time.deltaTime;
+        roundUI.text = "Round "+ round.ToString();
+        roundTimer.text = timer.ToString("F2") + "s To Next Round";
 
         if (spawnTimer <= 0)
         {
@@ -81,19 +85,15 @@ public class RoundManager : MonoBehaviour
         timer = roundTime;
 
         // Kill all enemies
+        //KillAllEnemies();
 
         // Increase the difficulity based on round number
         nOfEnemies = (int)(round * nOfEnemiesMultiplayer);
         currentEnemies = nOfEnemies;
-        spawnEachInSeconds = roundTime / nOfEnemies;
+        spawnEachInSeconds = 3.5f - (round * 0.2f);
 
         // Randomise player weapon
         getNewWeapon();
-    }
-
-    private void KillAll()
-    {
-
     }
 
     private void getNewWeapon()
@@ -114,29 +114,42 @@ public class RoundManager : MonoBehaviour
         if(randomNumber < 40) // drakes
         {            
             spawnPoint = Random.Range(0, drakeSpawnPoints.Length);
-            Instantiate(Enemies[0], drakeSpawnPoints[spawnPoint].position, Quaternion.identity);
+            aliveEnemies.Add(Instantiate(Enemies[0], drakeSpawnPoints[spawnPoint].position, Quaternion.identity));
         }
         else if(randomNumber < 70) // jacals
         {
             spawnPoint = Random.Range(0, jackalsSpawnPoints.Length);
-            Instantiate(Enemies[1], jackalsSpawnPoints[spawnPoint].position, Quaternion.identity);
+            aliveEnemies.Add(Instantiate(Enemies[1], jackalsSpawnPoints[spawnPoint].position, Quaternion.identity));
 
         }
         else if (randomNumber < 80) // ghoul
         {
             spawnPoint = Random.Range(0, ghoulSpawnPoints.Length);
-            Instantiate(Enemies[2], ghoulSpawnPoints[spawnPoint].position, Quaternion.identity);
+            aliveEnemies.Add(Instantiate(Enemies[2], ghoulSpawnPoints[spawnPoint].position, Quaternion.identity));
 
         }
         else if (randomNumber < 90) // fiends
         {
             spawnPoint = Random.Range(0, fiendsSpawnPoints.Length);
-            Instantiate(Enemies[3], fiendsSpawnPoints[spawnPoint].position, Quaternion.identity);
+            aliveEnemies.Add(Instantiate(Enemies[3], fiendsSpawnPoints[spawnPoint].position, Quaternion.identity));
 
         }
         else // Imposter Sniper
         {
-            Instantiate(Enemies[4], Vector3.zero, Quaternion.identity);
+            aliveEnemies.Add(Instantiate(Enemies[4], Vector3.zero, Quaternion.identity));
+        }
+    }
+
+    public void KillAllEnemies()
+    {
+        for (int i = aliveEnemies.Count - 1; i >= 0; i--)
+        {
+            if (aliveEnemies[i] != null)
+            {
+                Destroy(aliveEnemies[i]);
+            }
+
+            aliveEnemies.RemoveAt(i);
         }
     }
 }

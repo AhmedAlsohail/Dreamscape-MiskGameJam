@@ -32,12 +32,46 @@ public class Enemy_Dasher : MonoBehaviour
 
     void Update()
     {
+
+        if (target != null)
+        {
+            // Calculate the direction from the object to the target
+            Vector3 directionToTarget = target.position - transform.position;
+
+            // Calculate the rotation angle needed to look at the target
+            float angle = Mathf.Atan2(directionToTarget.y, directionToTarget.x) * Mathf.Rad2Deg;
+
+            // Check if the target is on the left or right
+            if (directionToTarget.x < 0)
+            {
+                // Flip the object
+                transform.localScale = new Vector3(-1, 1, 1); // Flipped along the X-axis
+
+                // Apply the rotation to the object
+                transform.rotation = Quaternion.Euler(0, 0, angle + 180f);
+            }
+            else
+            {
+                // Unflip the object
+                transform.localScale = new Vector3(1, 1, 1); // Normal scale
+                // Apply the rotation to the object
+                transform.rotation = Quaternion.Euler(0, 0, angle);
+            }
+
+
+        }
         if (!isDashing && timer > 0)
         {
             timer -= Time.deltaTime;
             if (timer <= 0)
             {
                 isDashing = true; // Start dashing
+                // Update the positions
+                startPosition = transform.position;
+                Vector2 directionToTarget = (Vector2)target.position - startPosition;
+                directionToTarget.Normalize(); // Get the unit direction towards the target
+                endPosition = (Vector2)target.position + directionToTarget * continueDistance; // Position 50 units forward from the target
+
             }
 
             // Continue to rotate towards the target while waiting

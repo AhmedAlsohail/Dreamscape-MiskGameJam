@@ -81,6 +81,7 @@ MonoBehaviour:
   targetType: 1
   damage: 3
   destroyAfter: 1
+  timeSpawned: 0
 --- !u!1 &5950293820579141550
 GameObject:
   m_ObjectHideFlags: 0
@@ -156,7 +157,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 6c0484490e470994789774d9f341f088, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.3443396, g: 0.35541907, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

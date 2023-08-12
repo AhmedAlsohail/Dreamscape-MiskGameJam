@@ -8,6 +8,10 @@ public class playerHealth : MonoBehaviour
     public int currentHealth;
     public GameObject deathPanel;
     public GameObject roundManager;
+    public GameObject Timer;
+    public GameObject currentWeapon;
+    public GameObject health;
+
     void Start()
     {
         currentHealth = healthPoints;
@@ -34,7 +38,13 @@ public class playerHealth : MonoBehaviour
     {
         // Apply particle effect
         deathPanel.SetActive(true);
+        Timer.SetActive(false);
+        currentWeapon.SetActive(false);
+        health.SetActive(false);
+
+        // Hide rest of UIs
         Destroy(roundManager);
         gameObject.SetActive(false);
+
     }
 }

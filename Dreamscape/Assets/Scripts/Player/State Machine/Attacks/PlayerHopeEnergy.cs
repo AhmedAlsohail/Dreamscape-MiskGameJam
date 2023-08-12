@@ -7,7 +7,7 @@ public class PlayerHopeEnergy : PlayerState
 {
     public GameObject projectilePrefab; // Prefab to instantiate
     public float spawnRate = 0.1f; // Time in seconds between spawns
-    public float rotationIncrement = 10f; // Degrees to rotate each new object
+    public float rotationIncrement = 25f; // Degrees to rotate each new object
 
     private float timer;
     private float currentRotation;
@@ -48,7 +48,7 @@ public class PlayerHopeEnergy : PlayerState
         }
         else
         {
-            player.Run(xInput, 1f);
+            player.Run(xInput, 0.5f);
         }
 
         if (Input.GetButton("Fire")) // If the Fire button is pressed

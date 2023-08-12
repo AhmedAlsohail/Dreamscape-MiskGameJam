@@ -4,7 +4,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using TMPro;
 public class Player : MonoBehaviour
 {
     public PlayerController controller;
@@ -33,10 +33,12 @@ public class Player : MonoBehaviour
 
     public bool isGrounded;
 
+    private int currentWeapon = -1;
     [Header("Cooldown")]
     public float lastTimeAttacked;
     public float cooldown;
     public float[] cds;
+    public TextMeshProUGUI cdText;
 
     public BoxCollider2D collider { get; private set; }
 
@@ -77,6 +79,8 @@ public class Player : MonoBehaviour
     {
         stateMachine.currentState.Update();
         controller.Move(velocity * Time.deltaTime);
+        handleUI();
+
     }
 
     public void HandleGravity()
@@ -149,7 +153,16 @@ public class Player : MonoBehaviour
 
     public void switchWeapon(int newWeapon)
     {
-        switch (newWeapon)
+        if(newWeapon != currentWeapon)
+        {
+            currentWeapon = newWeapon;
+        }
+        else
+        {
+            currentWeapon = (currentWeapon + 1) % 3;
+        }
+
+        switch (currentWeapon)
         {
             case 0:
                 primaryAttack = new PlayerWisdomStaff(this, stateMachine, "Attack");
@@ -168,7 +181,7 @@ public class Player : MonoBehaviour
         // Reset Cooldown.
         lastTimeAttacked = Time.time - 100f;
 
-        anim.SetFloat("Weapon", newWeapon);
+        anim.SetFloat("Weapon", currentWeapon);
         stateMachine.ChangeState(idleState);
     }
     public bool IsGrounded()
@@ -184,6 +197,34 @@ public class Player : MonoBehaviour
         {
             return false;
         }
+    }
+
+    private void handleUI()
+    {
+        float cd = (cooldown + (lastTimeAttacked - Time.time));
+        if(cd <= 0)
+        {
+            cdText.fontSize = 14;
+            switch (currentWeapon)
+            {
+                case 0:
+                    cdText.text = "Wisdom";
+                    break;
+                case 1:
+                    cdText.text = "Hope";
+                    break;
+                case 2:
+                    cdText.text ="Bravery";
+                    break;
+            }
+        }
+        else
+        {
+            cdText.fontSize = 24;
+            cdText.text = cd.ToString("F2");
+        }
+
+       
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {

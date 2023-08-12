@@ -35,7 +35,7 @@ public class Enemy_Grower : MonoBehaviour
 
             // Update the object's scale based on the collider's size
             float scaleFactor = circleCollider.radius / originalRadius;
-            child.localScale = new Vector3(scaleFactor, scaleFactor, 1f);
+            child.localScale = new Vector3(0.2f * scaleFactor, 0.2f * scaleFactor, 1f);
         }
     }
 }

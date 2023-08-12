@@ -51,7 +51,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
-  speed: 50
+  speed: 25
   jumpForce: 10
   jumpDistance: 5
   noiseStrength: 0.1
@@ -60,6 +60,7 @@ MonoBehaviour:
     m_Bits: 8
   groundCheckRadius: 0.2
   isGrounded: 0
+  monstertSound: {fileID: 8300000, guid: a70683a94b5d9f546b44a4176d706d7b, type: 3}
 --- !u!70 &3106285236811280674
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

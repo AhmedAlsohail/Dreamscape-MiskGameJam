@@ -19,8 +19,16 @@ public class Enemy_Sniper : MonoBehaviour
 
     private bool isMoving = false; // Flag to control movement
 
+
+    public AudioClip reloadSound; // Assign the jump sound effect in the Inspector
+    public AudioClip shootSound; // Assign the jump sound effect in the Inspector
+    private SoundEffectManager soundEffectManager;
     void Start()
     {
+        soundEffectManager = FindObjectOfType<SoundEffectManager>();
+
+        soundEffectManager.PlaySoundEffect(reloadSound);
+
         target = GameObject.FindWithTag("Player").transform;
         camera = GameObject.FindWithTag("MainCamera").GetComponent<CameraEffects>();
         currentLifeTime = lifeTime;
@@ -85,6 +93,7 @@ public class Enemy_Sniper : MonoBehaviour
             target.GetComponent<playerHealth>().GetHit(1);
         }
         // shake camera
+        soundEffectManager.PlaySoundEffect(shootSound);
         camera.ShakeCamera();
         // Destroy self
         Destroy(gameObject);

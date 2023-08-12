@@ -175,6 +175,7 @@ MonoBehaviour:
   growthRate: 1.5
   touchRadius: 0.2
   waitTime: 0.75
+  inflationSound: {fileID: 8300000, guid: b1d693b3e68899446a26e49cf3bc433c, type: 3}
 --- !u!50 &-2893906659609537725
 Rigidbody2D:
   serializedVersion: 4

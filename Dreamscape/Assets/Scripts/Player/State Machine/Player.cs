@@ -13,6 +13,10 @@ public class Player : MonoBehaviour
     private float accelerationTimeGrounded = .1f;
     private float currentMoveSpeed;
 
+    public GameObject wisdomPrefab;
+    public GameObject hopePrefab;
+    public GameObject BraveryPrefab;
+
     public int facingDir { get; private set; } = 1;
     public bool isFacingRight = true;
 
@@ -208,13 +212,13 @@ public class Player : MonoBehaviour
             switch (currentWeapon)
             {
                 case 0:
-                    cdText.text = "Wisdom";
+                    cdText.text = "Wisdom Shots";
                     break;
                 case 1:
-                    cdText.text = "Hope";
+                    cdText.text = "Hope Waves";
                     break;
                 case 2:
-                    cdText.text ="Bravery";
+                    cdText.text ="Bravery Shout";
                     break;
             }
         }

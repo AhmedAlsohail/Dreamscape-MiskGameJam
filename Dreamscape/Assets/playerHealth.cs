@@ -11,7 +11,7 @@ public class playerHealth : MonoBehaviour
     public GameObject Timer;
     public GameObject currentWeapon;
     public GameObject health;
-
+    public GameObject hitParticle;
     void Start()
     {
         currentHealth = healthPoints;
@@ -26,6 +26,7 @@ public class playerHealth : MonoBehaviour
 
     public void GetHit(int damage)
     {
+        Instantiate(hitParticle, transform);
         currentHealth -= damage;
 
         if (currentHealth <= 0)
@@ -37,6 +38,7 @@ public class playerHealth : MonoBehaviour
     private void Die()
     {
         // Apply particle effect
+
         deathPanel.SetActive(true);
         Timer.SetActive(false);
         currentWeapon.SetActive(false);

@@ -14,7 +14,6 @@ public class BraveShoutProjectile : MonoBehaviour
         // Store the initial scale on the X axis
         initialScaleX = transform.localScale.x;
     }
-
     void Update()
     {
         // Validate the facingDir value
@@ -31,4 +30,5 @@ public class BraveShoutProjectile : MonoBehaviour
         newPosition.x += (newScale.x - initialScaleX) * 0.5f * facingDir;
         transform.position = newPosition;
     }
+
 }

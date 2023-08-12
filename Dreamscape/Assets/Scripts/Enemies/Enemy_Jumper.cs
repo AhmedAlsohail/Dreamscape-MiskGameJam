@@ -14,8 +14,13 @@ public class Enemy_Jumper : MonoBehaviour
     public bool isGrounded;
     private float noiseOffset;
 
+    public AudioClip monstertSound; // Assign the jump sound effect in the Inspector
+    private SoundEffectManager soundEffectManager;
     void Start()
     {
+        soundEffectManager = FindObjectOfType<SoundEffectManager>();
+        soundEffectManager.PlaySoundEffect(monstertSound);
+
         target = GameObject.FindWithTag("Player").transform;
         rb = GetComponent<Rigidbody2D>();
         noiseOffset = Random.Range(0f, 100f); // Randomize noise offset

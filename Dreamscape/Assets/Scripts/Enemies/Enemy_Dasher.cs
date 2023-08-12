@@ -15,8 +15,13 @@ public class Enemy_Dasher : MonoBehaviour
     private bool isDashing;
     private float timer;
 
+    public AudioClip monstertSound; // Assign the jump sound effect in the Inspector
+    private SoundEffectManager soundEffectManager;
     void Start()
     {
+        soundEffectManager = FindObjectOfType<SoundEffectManager>();
+        soundEffectManager.PlaySoundEffect(monstertSound);
+
         target = GameObject.FindWithTag("Player").transform; // Find target by tag if needed
         startPosition = transform.position;
         Vector2 directionToTarget = (Vector2)target.position - startPosition;

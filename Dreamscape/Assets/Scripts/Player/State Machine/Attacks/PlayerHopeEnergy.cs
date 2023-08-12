@@ -25,8 +25,7 @@ public class PlayerHopeEnergy : PlayerState
 
         timer = spawnRate; // Initialize timer
         currentRotation = Random.Range(0,360); // Initialize rotation
-        string prefabPath = "Assets/Prefabs/Projectiles/HopeProjectile.prefab";
-        projectilePrefab = AssetDatabase.LoadAssetAtPath<GameObject>(prefabPath);
+        projectilePrefab = player.hopePrefab;
 
     }
 

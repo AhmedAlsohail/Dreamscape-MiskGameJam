@@ -35,8 +35,7 @@ public class PlayerWisdomStaff : PlayerState
         shootPoint = player.transform;
 
         // Porjectile Prefab
-        string prefabPath = "Assets/Prefabs/Projectiles/WisdomStaffProj.prefab";
-        projectilePrefab = AssetDatabase.LoadAssetAtPath<GameObject>(prefabPath);
+        projectilePrefab = player.wisdomPrefab;
 
         offset = 90f;
         startTimeBtwShoots = 1f;

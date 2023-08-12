@@ -52,6 +52,7 @@ MonoBehaviour:
   target: {fileID: 0}
   speed: 8
   randomness: 2
+  wingstSound: {fileID: 8300000, guid: a4d050fa7cbdfef4f96c6895a55a6dae, type: 3}
 --- !u!70 &7560867138867606331
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

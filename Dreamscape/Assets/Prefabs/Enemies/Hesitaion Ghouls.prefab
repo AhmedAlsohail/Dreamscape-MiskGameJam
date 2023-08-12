@@ -126,7 +126,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6142319856659843995
 Transform:
   m_ObjectHideFlags: 0
@@ -157,9 +157,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 0}
   dashSpeed: 25
-  waitTime: 1
+  waitTime: 1.5
   continueDistance: 50
   rotationSpeed: 5
+  monstertSound: {fileID: 8300000, guid: b8f578eb1e1b2144c819aa076e1088c9, type: 3}
 --- !u!61 &6142319856659843997
 BoxCollider2D:
   m_ObjectHideFlags: 0

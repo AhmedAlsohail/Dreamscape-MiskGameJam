@@ -161,6 +161,8 @@ MonoBehaviour:
   moveTime: 0.7
   currentMoveTime: 0
   durationToTarget: 0.3
+  reloadSound: {fileID: 8300000, guid: 06da390f75bdcdc438e6d2fc88ded7af, type: 3}
+  shootSound: {fileID: 8300000, guid: 384a75c6640a91546a73203c2244a5dc, type: 3}
 --- !u!58 &876156046086368541
 CircleCollider2D:
   m_ObjectHideFlags: 0

@@ -8,8 +8,12 @@ public class Enemy_Fly : MonoBehaviour
     public float speed = 5f; // Speed of movement
     public float randomness = 0.5f; // Amount of randomness in movement
 
-    private void Start()
+    public AudioClip wingstSound; // Assign the jump sound effect in the Inspector
+    private SoundEffectManager soundEffectManager;
+    void Start()
     {
+        soundEffectManager = FindObjectOfType<SoundEffectManager>();
+        soundEffectManager.PlaySoundEffect(wingstSound);
         target = GameObject.FindWithTag("Player").transform;
     }
 

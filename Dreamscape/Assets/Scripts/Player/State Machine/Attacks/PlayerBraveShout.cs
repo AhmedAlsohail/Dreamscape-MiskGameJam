@@ -20,8 +20,7 @@ public class PlayerBraveShout : PlayerState
 
         player.lastTimeAttacked = Time.time;
 
-        string prefabPath = "Assets/Prefabs/Projectiles/BraveShoutProjectile.prefab";
-        projectilePrefab = AssetDatabase.LoadAssetAtPath<GameObject>(prefabPath);
+        projectilePrefab = player.BraveryPrefab;
         timeAttacked = Time.time;
 
         Shout();

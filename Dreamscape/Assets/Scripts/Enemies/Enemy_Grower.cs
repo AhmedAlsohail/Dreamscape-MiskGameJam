@@ -12,8 +12,15 @@ public class Enemy_Grower : MonoBehaviour
     private float timer;
 
     Transform child;
+
+    public AudioClip inflationSound; // Assign the jump sound effect in the Inspector
+    private SoundEffectManager soundEffectManager;
+
     void Start()
     {
+        soundEffectManager = FindObjectOfType<SoundEffectManager>();
+        soundEffectManager.PlaySoundEffect(inflationSound);
+
         target = GameObject.FindWithTag("Player").transform; // Find target by tag if needed
         circleCollider = GetComponent<CircleCollider2D>();
         originalRadius = circleCollider.radius;

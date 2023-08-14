@@ -11,10 +11,9 @@ https://dyore.itch.io/dreamscape
 - Audacity
 
 # Credits
-Music:
-- Working now by Hina
+**Music:** Working now by Hina
 
-Soundtracks: 
+**Soundtracks:**
 - 1911-reload-6248
 - balloon-inflation-85039
 - dog_bark_light_agressive-83242
@@ -22,4 +21,4 @@ Soundtracks:
 - monster-roar-6985
 - sniper-rifle-5989
 
-All other assets are made by myself.
+### All other assets are made by myself.
